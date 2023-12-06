@@ -42,43 +42,6 @@
 <main class="homePage pt-5">
     {% block content %}{% endblock %}
 </main>
-<script>
-    const sendToArticles = (key, value) => {
-        let url = window.location.href.split('?')[0];
-        let search = window.location.search;
-        const hasArticles = url.includes('articles');
-        if (!hasArticles) {
-            url += 'articles/';
-            search = '?page=1&paginate_by=10';
-        }
-
-        const urlParams = new URLSearchParams(search);
-
-        urlParams.set(key, value);
-
-        window.location.href = url + '?' + urlParams.toString();
-    }
-
-    const button = document.getElementById('header-button');
-    const sidenav = document.getElementById('custom-sidenav');
-    const backdrop = document.getElementById('sidenavBackgrop');
-
-    button.addEventListener('click', () => {
-        sidenav.classList.toggle('custom-sidenav--closed');
-        backdrop.classList.toggle('sidenavBackgrop--closed');
-    });
-
-    backdrop.addEventListener('click', () => {
-        sidenav.classList.toggle('custom-sidenav--closed');
-        backdrop.classList.toggle('sidenavBackgrop--closed');
-    });
-
-    const searchButton = document.getElementById('searchButton');
-    const searchInput = document.getElementById('searchInput');
-
-    searchButton.addEventListener('click', () => {
-        sendToArticles('search', searchInput.value);
-    });
-</script>
+<script src={% static 'js/custom/base.js' %}></script>
 </body>
 </html>

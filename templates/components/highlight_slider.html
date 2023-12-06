@@ -1,5 +1,8 @@
 {% block content %}
     <!--suppress JSUnresolvedLibraryURL -->
+    {% if not highlights %}
+        <p>Nenhum artigo encontrado.</p>
+    {% else %}
     <div id="slider" class="carousel slide" data-ride="carousel" data-interval="3000">
         <div class="carousel-inner">
             {% for highlighted in highlights %}
@@ -21,4 +24,5 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    {% endif %}
 {% endblock %}

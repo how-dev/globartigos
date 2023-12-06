@@ -13,10 +13,10 @@
                 <p class="articleDetail__created_at">{{ article.created_at|date:'d/m/Y' }}</p>
                 <p class="articleDetail__content">{{ article.content|truncatechars:80 }}</p>
             </div>
-            <button class="btn btn-outline-primary rounded-pill font-weight-light" onclick="(function() {
-                const url = window.location.href.split('/')[0];
-            window.location.href = `${url}/articles/` + {{ article.id }} + '/';
-            })()">
+            <button
+                class="btn btn-outline-primary rounded-pill font-weight-light"
+                onclick="redirectToArticle({{ article.id }})"
+            >
                 Leia mais
             </button>
         </div>

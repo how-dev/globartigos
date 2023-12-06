@@ -15,27 +15,5 @@
         </select>
     </div>
     <button class="btn btn-primary ml-auto d-block" id="cleanFilters">Limpar filtros</button>
-    {% include 'components/pagination.html' %}
-    <ol class="list-unstyled articlesList">
-        {% for article in object_list %}
-            <li>
-                {% include 'components/article_card.html' with article=article %}
-            </li>
-        {% endfor %}
-    </ol>
-    {% include 'components/pagination.html' %}
-    <script>
-        const cleanFilters = document.getElementById('cleanFilters');
-        cleanFilters.addEventListener('click', () => {
-            const url = window.location.href
-
-            window.location.href = url.split('?')[0];
-        });
-        const paginateSelect = document.getElementById('paginateSelect');
-
-        paginateSelect.addEventListener('change', () => {
-            sendToArticles('paginate_by', paginateSelect.value);
-        })
-    </script>
+    {% include 'components/paginated_article_section.html' %}
 {% endblock %}
-```

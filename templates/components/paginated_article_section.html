@@ -1,0 +1,5 @@
+{% block content %}
+    {% include 'components/pagination.html' %}
+    {% include 'components/article_sectioned.html' with articles=object_list is_list=True %}
+    {% include 'components/pagination.html' %}
+{% endblock %}

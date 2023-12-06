@@ -1,0 +1,13 @@
+{% block content %}
+    {% if articles|length == 0 %}
+        <p>Nenhum artigo encontrado.</p>
+    {% else %}
+    <ol class="list-unstyled {% if is_list %}articlesList{% endif %}">
+        {% for article in articles %}
+            <li>
+                {% include 'components/article_card.html' with article=article article_id=article.id %}
+            </li>
+        {% endfor %}
+    </ol>
+    {% endif %}
+{% endblock %}
