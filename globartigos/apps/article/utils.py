@@ -40,6 +40,13 @@ class ArticleViewMixin:
                 )
             )
 
+    def get_object(self, *args, **kwargs):
+        article = super().get_object(*args, **kwargs)
+        if article:
+            article.register_access()
+
+        return article
+
     def _set_most_read(self, context):
         queryset = self.get_queryset()
         context["most_read"] = queryset.order_by("-access_count")[:3]
