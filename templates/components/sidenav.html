@@ -1,0 +1,19 @@
+{% block content %}
+    <nav class="custom-sidenav custom-sidenav--closed" id="custom-sidenav">
+        <ul class="list-unstyled custom-sidenav__categoryList pl-4 pr-4">
+            {% for category in categories %}
+                <li class="border-bottom pb-2 mb-2 font-weight-bold pointer-event categorySideNav">{{ category }}</li>
+            {% endfor %}
+        </ul>
+    </nav>
+    <div class="sidenavBackgrop sidenavBackgrop--closed" id="sidenavBackgrop"></div>
+    <script>
+        const categorySideNav = document.getElementsByClassName('categorySideNav');
+
+        for(let category of categorySideNav){
+            category.addEventListener('click', function(){
+                sendToArticles('category', category.innerText)
+            })
+        }
+    </script>
+{% endblock content %}

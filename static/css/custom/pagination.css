@@ -1,0 +1,22 @@
+:root {
+    --pagination-button-color: var(--blue);
+}
+
+
+.paginationBlockLinks__button, .paginationBlockLinks__button--current {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: var(--pagination-button-color);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    padding: 6px 12px;
+    text-align: center;
+    border-radius: 100%;
+}
+
+.paginationBlockLinks__button--current {
+    background-color: var(--pagination-button-color);
+    border-color: var(--pagination-button-color);
+    color: #fff;
+}

@@ -1,0 +1,84 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Globartigos</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom/article_card.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom/sidenav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom/pagination.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom/article_list.css' %}">
+</head>
+<body>
+<header class="w-100">
+    <nav class="navbar navbar-light bg-light pr-5">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" style="z-index: 3" id="header-button"
+                data-mdb-target="#navbarToggleExternalContent2" aria-controls="navbarToggleExternalContent2"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="text-center">
+            <a href="{% url 'home' %}" class="text-dark text-decoration-none siteTitle">Globartigos</a>
+        </h1>
+        <div class="row">
+            <div class="input-group">
+                <label for="searchInput" class="d-none">Pesquisar artigos</label>
+                <input id="searchInput" type="text" class="form-control" name="pesquisa" placeholder="Pesquisar artigos">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" id="searchButton">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            {% include 'components/sidenav.html' %}
+        </div>
+    </nav>
+</header>
+<main class="homePage pt-5">
+    {% block content %}{% endblock %}
+</main>
+<script>
+    const sendToArticles = (key, value) => {
+        let url = window.location.href.split('?')[0];
+        let search = window.location.search;
+        const hasArticles = url.includes('articles');
+        if (!hasArticles) {
+            url += 'articles/';
+            search = '?page=1&paginate_by=10';
+        }
+
+        const urlParams = new URLSearchParams(search);
+
+        urlParams.set(key, value);
+
+        window.location.href = url + '?' + urlParams.toString();
+    }
+
+    const button = document.getElementById('header-button');
+    const sidenav = document.getElementById('custom-sidenav');
+    const backdrop = document.getElementById('sidenavBackgrop');
+
+    button.addEventListener('click', () => {
+        sidenav.classList.toggle('custom-sidenav--closed');
+        backdrop.classList.toggle('sidenavBackgrop--closed');
+    });
+
+    backdrop.addEventListener('click', () => {
+        sidenav.classList.toggle('custom-sidenav--closed');
+        backdrop.classList.toggle('sidenavBackgrop--closed');
+    });
+
+    const searchButton = document.getElementById('searchButton');
+    const searchInput = document.getElementById('searchInput');
+
+    searchButton.addEventListener('click', () => {
+        sendToArticles('search', searchInput.value);
+    });
+</script>
+</body>
+</html>

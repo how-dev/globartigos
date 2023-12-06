@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if category %}
+        <p>Você está buscando por: <b>{{ category }}</b></p>
+    {% endif %}
+    <div class="articlesTop">
+        <p class="articlesTop__results">{{ object_count }} Resultados encontrados</p>
+        <div class="articlesTop__divider mr-5"></div>
+        <label for="paginateSelect">Paginação</label>
+        <select class="form-control articlesTop__pagination" id="paginateSelect">
+            <option value="5" {% if paginate_by == '5' %}selected{% endif %}>5</option>
+            <option value="10" {% if paginate_by == '10' %}selected{% endif %}>10</option>
+            <option value="20" {% if paginate_by == '20' %}selected{% endif %}>20</option>
+        </select>
+    </div>
+    <button class="btn btn-primary ml-auto d-block" id="cleanFilters">Limpar filtros</button>
+    {% include 'components/pagination.html' %}
+    <ol class="list-unstyled articlesList">
+        {% for article in object_list %}
+            <li>
+                {% include 'components/article_card.html' with article=article %}
+            </li>
+        {% endfor %}
+    </ol>
+    {% include 'components/pagination.html' %}
+    <script>
+        const cleanFilters = document.getElementById('cleanFilters');
+        cleanFilters.addEventListener('click', () => {
+            const url = window.location.href
+
+            window.location.href = url.split('?')[0];
+        });
+        const paginateSelect = document.getElementById('paginateSelect');
+
+        paginateSelect.addEventListener('change', () => {
+            sendToArticles('paginate_by', paginateSelect.value);
+        })
+    </script>
+{% endblock %}
+```

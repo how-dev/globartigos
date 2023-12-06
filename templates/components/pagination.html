@@ -1,0 +1,19 @@
+{% block content %}
+    {% if page_obj.paginator.num_pages > 1 %}
+        <div class="pagination align-self-center mb-4">
+            <span class="step-links paginationBlockLinks">
+                <a class="paginationBlockLinks__button" href="?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% else %}{{ page_obj.number }}{% endif %}&paginate_by={{ page_obj.paginator.per_page }}">&lt;</a>
+                {% for i in page_obj.paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <span class="current paginationBlockLinks__button paginationBlockLinks__button--current">
+                            {{ i }}
+                        </span>
+                    {% else %}
+                        <a class="paginationBlockLinks__button" href="?page={{ i }}&paginate_by={{ page_obj.paginator.per_page }}">{{ i }}</a>
+                    {% endif %}
+                {% endfor %}
+                <a class="paginationBlockLinks__button" href="?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% else %}{{ page_obj.number }}{% endif %}&paginate_by={{ page_obj.paginator.per_page }}">&gt;</a>
+            </span>
+        </div>
+    {% endif %}
+{% endblock %}

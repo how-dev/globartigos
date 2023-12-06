@@ -1,0 +1,47 @@
+.homePage {
+    margin-inline: auto;
+    max-width: 1200px;
+    height: calc(100vh - 72px);
+    overflow-y: scroll;
+}
+
+.homePageTop {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.homePageTop__section {
+    flex-basis: 48%;
+}
+
+.homePage__section > section > h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.homePageBottom {
+    display: flex;
+    flex-direction: column;
+}
+.articlesList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.carousel-nextButton::after {
+    font-family: 'FontAwesome', serif;
+    content: '\f054';
+    color: #000;
+}
+
+/* Ícone para o botão "Anterior" */
+.carousel-previousButton::before {
+    font-family: 'FontAwesome', serif;
+    content: '\f053';
+    color: #000;
+}
+.carousel-control-next, .carousel-control-prev {
+    height: 50%;
+}

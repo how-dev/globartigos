@@ -1,0 +1,24 @@
+{% block content %}
+    <article class="{% if is_highlighted %}flex-column{% endif %} justify-content-between articleGroup"
+             style="{% if is_highlighted %}max-height: none{% endif %}">
+        <figure class="articleFigure" style="{% if is_highlighted %}height: 250px; flex-basis: auto{% endif %}">
+            <img src="{{ article.banner_url }}" alt="{{ article.title }}" class="articleFigure__image"/>
+            <figcaption class="d-none">{{ article.title }}</figcaption>
+        </figure>
+        <div class="articleDetail">
+            <div>
+                <p class="articleDetail__category">{{ article.category.name.upper }}</p>
+                <p class="articleDetail__title"
+                   style="{% if is_highlighted %}font-size: 3rem{% endif %}">{{ article.title|truncatechars:30 }}</p>
+                <p class="articleDetail__created_at">{{ article.created_at|date:'d/m/Y' }}</p>
+                <p class="articleDetail__content">{{ article.content|truncatechars:80 }}</p>
+            </div>
+            <button class="btn btn-outline-primary rounded-pill font-weight-light" onclick="(function() {
+                const url = window.location.href.split('/')[0];
+            window.location.href = `${url}/articles/` + {{ article.id }} + '/';
+            })()">
+                Leia mais
+            </button>
+        </div>
+    </article>
+{% endblock %}

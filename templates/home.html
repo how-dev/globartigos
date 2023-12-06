@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
+        <div class="homePage__section homePage__section--top homePageTop">
+            <section class="homePageTop__section homePageTop__section--highlight">
+                <h2>Destaque</h2>
+                {% if not highlights %}
+                    <p>Nenhum artigo encontrado.</p>
+                {% else %}
+                    {% include 'components/highlight_slider.html' %}
+                {% endif %}
+            </section>
+            <section class="homePageTop__section homePageTop__section--mostRead">
+                <h2>Mais lidos</h2>
+                {% if not most_read %}
+                    <p>Nenhum artigo encontrado.</p>
+                {% else %}
+                    <ol class="list-unstyled">
+                        {% for article in most_read %}
+                            <li>
+                                {% include 'components/article_card.html' with article=article article_id=article.id%}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                {% endif %}
+            </section>
+        </div>
+        <section class="homePage__section homePage__section--bottom homePageBottom">
+            <h2>Últimas publicações</h2>
+
+            {% if not object_list %}
+                <p>Nenhum artigo encontrado.</p>
+            {% else %}
+                {% include 'components/pagination.html' %}
+                <ol class="list-unstyled articlesList">
+                    {% for article in object_list %}
+                        <li>
+                            {% include 'components/article_card.html' with article=article article_id=article.id %}
+                        </li>
+                    {% endfor %}
+                </ol>
+                {% include 'components/pagination.html' %}
+            {% endif %}
+        </section>
+    </div>
+{% endblock %}
